@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main_fragments.HomeFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Space
+                android:id="@+id/spaceProfile"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/viewUserDataProfile"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spaceProfile" />
+
+            <ImageView
+                android:id="@+id/imageViewUserProfile"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginEnd="258dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/baseline_account_circle_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/viewUserDataProfile" />
+
+
+            <TextView
+                android:id="@+id/usernameProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="175dp"
+                android:layout_marginTop="30dp"
+                android:text="Username"
+                android:textColor="@color/darkGrey"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spaceProfile" />
+
+            <TextView
+                android:id="@+id/emailProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Email"
+                android:textColor="@color/darkGrey"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="15dp"
+                android:autoSizeMaxTextSize="25dp"
+                app:layout_constraintStart_toStartOf="@+id/usernameProfile"
+                app:layout_constraintTop_toBottomOf="@+id/usernameProfile" />
+
+            <View
+                android:id="@+id/separatorProfile"
+                android:layout_width="370dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:background="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUserDataProfile" />
+
+            <TextView
+                android:id="@+id/buttonChangeEmail"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:layout_marginStart="20dp"
+                android:text="         Cambio Email"
+                android:textSize="30sp"
+                android:textColor="@color/darkGrey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUserDataProfile"
+                app:drawableEndCompat="@drawable/pencil"
+                app:drawableStartCompat="@drawable/mail" />
+            />
+
+            <TextView
+                android:id="@+id/buttonChangePassword"
+                android:layout_width="380dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:layout_marginStart="20dp"
+                android:text="      Cambio Password"
+                android:textSize="30sp"
+                android:textColor="@color/darkGrey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonChangeEmail"
+                app:drawableEndCompat="@drawable/pencil"
+                app:drawableStartCompat="@drawable/password" />
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

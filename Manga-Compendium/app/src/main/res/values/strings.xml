@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">MangaCompendium</string>
+    <string name="login">Login</string>
+    <string name="registrazione">Registrazione</string>
+    <string name="registrati">Registrati</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="nuovoUtente">Nuovo utente? Registrati</string>
+    <string name="inserisciPassword"> Inserisci la tua password</string>
+    <string name="inserisciusername"> Inserisci il tuo username</string>
+    <string name="inserisciFoto">Inserisci la foto</string>
+    <string name="conferma_password">Conferma Password</string>
+    <string name="conferma_la_tua_password">Conferma la tua password</string>
+    <string name="inserisci_città">Inserisci la tua città di provenienza</string>
+    <string name="data_di_nascita">Data di nascita</string>
+    <string name="inserisci_data">Inserisci la tua data di nascita</string>
+    <string name="possiedi_un_account">Possiedi già un account? Accedi</string>
+    <string name="cambio_password">Cambio Password</string>
+    <string name="logout">Logout</string>
+    <string name="visualizza_utenti">Visualizza Utenti</string>
+    <string name="password_corrente">Password Corrente</string>
+    <string name="inserisci_password_corrente">Inserisci la password corrente</string>
+    <string name="nuova_password">Nuova Password</string>
+    <string name="inserisci_la_nuova_password">Inserisci la nuova password</string>
+    <string name="ripeti_password">Ripeti Nuova Password</string>
+    <string name="riinserisci_nuova_password">Ripeti la nuova password</string>
+    <string name="salva">SALVA</string>
+    <string name="torna_alla_home">Torna alla Home</string>
+    <string name="inserisci_utente">  Inserisci l\'utente da cercare</string>
+    <string name="inserisci_tua_password">Inserisci la tua password</string>
+    <string name="aggiungi_manga">Aggiungi</string>
+    <string name="manga_aggiunto">Aggiunto</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
+
+

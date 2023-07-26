@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MangaFragment">
+
+    <View
+        android:id="@+id/topViewManga"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mangaPageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Mangaaaaaa"
+        android:textColor="#FFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/backManga"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="@+id/topViewManga"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Space
+                android:id="@+id/spaceManga"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/secondViewManga"
+                android:layout_width="0dp"
+                android:layout_height="175dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spaceManga" />
+
+            <ImageView
+                android:id="@+id/imageViewManga"
+                android:layout_width="140dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="258dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/manga_no_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/secondViewManga" />
+
+
+            <TextView
+                android:id="@+id/titleManga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="15dp"
+                android:text="Title"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spaceManga" />
+
+            <TextView
+                android:id="@+id/buttonAddManga"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:text="@string/aggiungi_manga"
+                android:textAlignment="center"
+                android:background="@drawable/borderfield_grey"
+                app:drawableEndCompat="@drawable/star_grey"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/darkGrey"
+                android:layout_marginTop="12dp"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/titleManga"
+                app:layout_constraintTop_toBottomOf="@+id/titleManga"
+                 />
+
+            <!--<TextView
+                android:id="@+id/buttonStateManga"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:text="Stato"
+                android:textAlignment="center"
+                android:background="@drawable/borderfield_grey"
+                app:drawableEndCompat="@drawable/arrow_down"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="10dp"
+                android:textColor="@color/darkGrey"
+                android:layout_marginTop="6dp"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/titleManga"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddManga"
+                />-->
+
+            <Spinner
+                android:id="@+id/stateSpinner"
+                android:layout_width="165dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/borderfield_grey"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@+id/titleManga"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAddManga"
+                />
+
+            <View
+                android:id="@+id/separatorManga"
+                android:layout_width="370dp"
+                android:layout_height="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/secondViewManga" />
+
+
+            <TextView
+                android:id="@+id/textAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Autore :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separatorManga"
+                />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="184dp"
+                android:text="Autore"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textAuthor"
+                app:layout_constraintTop_toBottomOf="@id/separatorManga" />
+
+            <TextView
+                android:id="@+id/textPublisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Editore :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textAuthor"
+                />
+
+
+            <TextView
+                android:id="@+id/publisher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="184dp"
+                android:text="Editore"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textPublisher"
+                app:layout_constraintTop_toBottomOf="@id/author" />
+
+            <TextView
+                android:id="@+id/textMagazine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Rivista :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textPublisher"
+                />
+
+
+            <TextView
+                android:id="@+id/magazine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="184dp"
+                android:text="Rivista"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textPublisher"
+                app:layout_constraintTop_toBottomOf="@id/publisher" />
+
+            <TextView
+                android:id="@+id/textYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Anno :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textMagazine"
+                />
+
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="235dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Anno"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textGenre"
+                app:layout_constraintTop_toBottomOf="@id/magazine"/>
+
+            <TextView
+                android:id="@+id/textGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Genere :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textYear"
+                />
+
+            <TextView
+                android:id="@+id/genre"
+                android:layout_width="235dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Genereaaaaaaaaaaaaaqwertyuiopasdfg"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textGenre"
+                app:layout_constraintTop_toBottomOf="@id/year"/>
+
+            <TextView
+                android:id="@+id/textVolumes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Volumi :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genre"
+                />
+
+            <TextView
+                android:id="@+id/volumes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="184dp"
+                android:text="Numero volumi"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textVolumes"
+                app:layout_constraintTop_toBottomOf="@id/genre" />
+
+
+            <TextView
+                android:id="@+id/textChampters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:text="Capitoli :"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/volumes"
+                />
+
+            <TextView
+                android:id="@+id/chapters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="184dp"
+                android:text="Numero capitoli"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textChampters"
+                app:layout_constraintTop_toBottomOf="@id/volumes" />
+
+            <TextView
+                android:id="@+id/textPlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="38dp"
+                android:text="Trama"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/textChampters"
+                app:layout_constraintTop_toBottomOf="@id/textChampters" />
+
+            <TextView
+                android:id="@+id/plot"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Tramadfgyuvcfhghvhjighvbhjdsjdcbshdhhdsjaijghv"
+                android:textColor="@color/darkGrey"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textPlot"
+                app:layout_constraintWidth_percent="0.9" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

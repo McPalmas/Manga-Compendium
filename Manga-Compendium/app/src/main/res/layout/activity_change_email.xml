@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeEmail">
+
+    <View
+        android:id="@+id/topViewChangeEmail"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textChangeEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Cambio Email"
+        android:textColor="#FFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/backChangeEmail"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="@+id/topViewChangeEmail"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textOldEmail"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:text="Email Corrente"
+        android:textColor="@color/darkGrey"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topViewChangeEmail" />
+
+    <EditText
+        android:id="@+id/oldEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/darkGrey"
+        android:textSize="18sp"
+        android:textColor="@color/darkGrey"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/borderfield_grey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textOldEmail"
+        app:layout_constraintWidth_percent="0.8"/>
+
+    <TextView
+        android:id="@+id/textNewEmail"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="40dp"
+        android:text="Nuova Email"
+        android:textColor="@color/darkGrey"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/oldEmail" />
+
+    <EditText
+        android:id="@+id/newEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Inserisci la nuova email"
+        android:textColorHint="@color/darkGrey"
+        android:textSize="18sp"
+        android:inputType="text"
+        android:textColor="@color/darkGrey"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/borderfield_grey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textNewEmail"
+        app:layout_constraintWidth_percent="0.8"/>
+
+
+    <Button
+        android:id="@+id/buttonSaveEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:padding="13dp"
+        android:text="@string/salva"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newEmail"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
