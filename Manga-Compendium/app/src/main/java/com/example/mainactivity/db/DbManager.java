@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteException;
 
 import com.example.mainactivity.Manga;
 import com.example.mainactivity.MangaState;
+import com.example.mainactivity.Message;
 import com.example.mainactivity.R;
+import com.example.mainactivity.Thread;
 import com.example.mainactivity.User;
 
 import java.util.ArrayList;
@@ -90,6 +92,57 @@ public  class DbManager
         try
         {
             db.insert(DbStrings.User.TABLE, null,cv);
+        }
+        catch (SQLiteException sqle)
+        {
+            System.out.println("erroreeeeeeeeeeee");
+        }
+    }
+
+    public void saveThread(Thread thread)
+    {
+        SQLiteDatabase db=dbhelper.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(DbStrings.Thread.IMAGE, thread.getImage());
+        cv.put(DbStrings.Thread.TITLE, thread.getTitle());
+        cv.put(DbStrings.Thread.ID_USER_CRETAOR, thread.getId_creator());
+        cv.put(DbStrings.Thread.ID_MSG, thread.getId_msg());
+        try
+        {
+            db.insert(DbStrings.Thread.TABLE, null,cv);
+        }
+        catch (SQLiteException sqle)
+        {
+            System.out.println("erroreeeeeeeeeeee");
+        }
+    }
+
+    public void saveMessage(Message message)
+    {
+        SQLiteDatabase db=dbhelper.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(DbStrings.Message.TEXT, message.getText());
+        cv.put(DbStrings.Message.ID_USER, message.getId_user());
+        cv.put(DbStrings.Message.DATE, message.getDate());
+        try
+        {
+            db.insert(DbStrings.Message.TABLE, null,cv);
+        }
+        catch (SQLiteException sqle)
+        {
+            System.out.println("erroreeeeeeeeeeee");
+        }
+    }
+
+    public void saveUserThread(Integer id_user, Integer id_thread)
+    {
+        SQLiteDatabase db=dbhelper.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(DbStrings.UserThread.ID_USER, id_user);
+        cv.put(DbStrings.UserThread.ID_THREAD, id_thread);
+        try
+        {
+            db.insert(DbStrings.UserThread.TABLE, null,cv);
         }
         catch (SQLiteException sqle)
         {

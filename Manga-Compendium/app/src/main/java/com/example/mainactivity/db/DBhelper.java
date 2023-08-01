@@ -43,6 +43,28 @@ import android.database.sqlite.SQLiteOpenHelper;
                     DbStrings.UserManga.FIELD_STATE_MANGA+" INTEGER," +
                     "FOREIGN KEY (id_manga) REFERENCES " +DbStrings.Manga.TABLE + " (_id),"+
                     "FOREIGN KEY (id_user) REFERENCES " +DbStrings.User.TABLE + " (_id))");
+
+
+            db.execSQL("CREATE TABLE "+ DbStrings.Thread.TABLE+
+                    " ( " + DbStrings.Thread.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    DbStrings.Thread.IMAGE+" TEXT," +
+                    DbStrings.Thread.TITLE+" TEXT," +
+                    DbStrings.Thread.ID_USER_CRETAOR+" INTEGER," +
+                    DbStrings.Thread.ID_MSG+" INTEGER)");
+
+
+            db.execSQL("CREATE TABLE "+ DbStrings.Message.TABLE+
+                    " ( " + DbStrings.Message.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    DbStrings.Message.TEXT+" TEXT," +
+                    DbStrings.Message.ID_USER+" INTEGER," +
+                    DbStrings.Message.DATE+" TEXT)");
+
+            db.execSQL("CREATE TABLE "+ DbStrings.UserThread.TABLE+
+                    " (" + DbStrings.UserThread.ID_USER+" INTEGER," +
+                    DbStrings.UserThread.ID_THREAD+" TEXT," +
+                    "FOREIGN KEY (id_user) REFERENCES " +DbStrings.User.TABLE + " (_id),"+
+                    "FOREIGN KEY (id_thread) REFERENCES " +DbStrings.Thread.TABLE + " (_id))");
+
         }
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

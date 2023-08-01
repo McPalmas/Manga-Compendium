@@ -121,8 +121,16 @@ implements  PopupMenu.OnMenuItemClickListener {
                     popup.show();
                     currentManga = mangas.get(viewHolder.getAdapterPosition()).getTitle();
 
-                    //viewHolder.getViewDelete().setVisibility(View.VISIBLE);
-
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            System.out.println("eliminatoooooooooooo"+viewHolder.getTextViewTitle().getText().toString());
+                            db.deleteUserManga(LogIn.sharedPref.getInt("user",-1),viewHolder.getTextViewTitle().getText().toString());
+                            mangas.remove(viewHolder.getAdapterPosition());
+                            notifyDataSetChanged();
+                            return false;
+                        }
+                    });
             }
         });
 

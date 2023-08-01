@@ -58,11 +58,30 @@ public class DbStrings
 
     }
 
-    public static class Discussion {
-        public static final String TABLE = "discussion";
-        public static final String FIELD_ID_USER_ADMIN = "id_user_admin";
-        public static final String FIELD_ID_MSG = "msg";
-        public static final String FIELD_STATE = "state";
+    public static class Thread {
+        public static final String TABLE = "thread";
+        public static final String ID = "_id";
+        public static final String IMAGE = "image";
+
+        public static final String TITLE = "title";
+        public static final String ID_USER_CRETAOR = "id_user_creator";
+        public static final String ID_MSG = "id_msg";
+    }
+
+
+    public static class Message{
+        public static final String TABLE = "message";
+        public static final String ID = "_id";
+        public static final String TEXT = "text";
+        public static final String ID_USER = "id_user";
+        public static final String DATE = "date";
+    }
+
+
+    public static class UserThread {
+        public static final String TABLE = "userThread";
+        public static final String ID_USER = "id_user";
+        public static final String ID_THREAD = "id_thread";
     }
 
 
