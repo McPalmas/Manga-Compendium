@@ -99,6 +99,24 @@ public  class DbManager
         }
     }
 
+
+    public void createUserThread(Integer id_user, Integer id_thread)
+    {
+        SQLiteDatabase db=dbhelper.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(DbStrings.UserThread.ID_USER, id_user);
+        cv.put(DbStrings.UserThread.ID_THREAD, id_thread);
+        try
+        {
+            Long l= db.insert(DbStrings.UserThread.TABLE, null, cv);
+        }
+        catch (SQLiteException sqle)
+        {
+            System.out.println("erroreeeeeeeeeeee");
+        }
+
+    }
+
     public Integer createThread(Thread thread)
     {
         SQLiteDatabase db=dbhelper.getWritableDatabase();
@@ -146,7 +164,7 @@ public  class DbManager
 
     }
 
-    public void saveMessage(Message message)
+    public void createMessage(Message message)
     {
         SQLiteDatabase db=dbhelper.getWritableDatabase();
         ContentValues cv=new ContentValues();
@@ -233,6 +251,27 @@ public  class DbManager
         db.delete(DbStrings.UserManga.TABLE, DbStrings.UserManga.FIELD_ID_USER + "=?" + " and " + DbStrings.UserManga.FIELD_ID_MANGA + "=?" ,new String[] {user_id.toString(),manga_id.toString()});
     }
 
+    public void deleteUserThread(Integer id_user, Integer id_thread){
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        db.delete(DbStrings.UserThread.TABLE, DbStrings.UserThread.ID_USER + "=?" + " and " + DbStrings.UserThread.ID_THREAD + "=?" ,new String[] {id_user.toString(),id_thread.toString()});
+    }
+
+    public boolean findUserThread(Integer id_user, Integer id_thread){
+        Cursor crs = null;
+        try
+        {
+            SQLiteDatabase db=dbhelper.getReadableDatabase();
+            crs=db.query(DbStrings.UserThread.TABLE, null, DbStrings.UserThread.ID_USER + "=?" + " and " + DbStrings.UserThread.ID_THREAD + "=?", new String[] {id_user.toString(),id_thread.toString()} , null, null, null, null);
+            crs.moveToFirst();
+
+            if(crs.getCount() == 0)
+                return false;
+
+            return true;
+        }
+        catch (SQLiteException sqle) { System.out.println("erroreeeeeeeeeeee");}
+        return false;
+    }
 
     public Integer userLogin(String username, String psw)
     {

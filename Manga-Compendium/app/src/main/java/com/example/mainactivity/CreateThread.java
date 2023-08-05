@@ -107,6 +107,7 @@ public class CreateThread extends Fragment {
             if(checkFields()) {
                 thread = new Thread("",title.getText().toString(),description.getText().toString(),LogIn.sharedPref.getInt("user",-1));
                 Integer id = db.createThread(thread);
+                db.createUserThread(LogIn.sharedPref.getInt("user",-1),id);
                 ThreadFragment fragment = new ThreadFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", id);

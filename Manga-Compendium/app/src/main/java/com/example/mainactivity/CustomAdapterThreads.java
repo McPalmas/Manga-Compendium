@@ -26,12 +26,16 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView image;
-        private final TextView title;
+        private final TextView title, info;
+
+        private final View threadIcon;
 
         public ViewHolder(View view) {
             super(view);
             image = view.findViewById(R.id.imageRowThread);
             title = view.findViewById(R.id.textRowThread);
+            info = view.findViewById(R.id.infoThread);
+            threadIcon = view.findViewById(R.id.addedThreadIcon);
         }
 
         public ImageView getImageView() {
@@ -39,6 +43,13 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         }
         public TextView getTextViewTitle() {
             return title;
+        }
+
+        public View getViewIcon() {
+            return threadIcon;
+        }
+        public TextView getTextViewInfo() {
+            return info;
         }
 
     }
@@ -64,6 +75,16 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getImageView().setImageURI(Uri.parse(threads.get(position).getImage()));
         viewHolder.getTextViewTitle().setText(threads.get(position).getTitle());
+
+        User user = db.getUserById(threads.get(position).getId_creator());
+        viewHolder.getTextViewInfo().setText(user.getUsername());
+
+        //viewHolder.getTextViewInfo().setEnabled(db.findUserThread(LogIn.sharedPref.getInt("user", -1), threads.get(viewHolder.getAdapterPosition()).getId()));
+
+        if(db.findUserThread(LogIn.sharedPref.getInt("user", -1), threads.get(viewHolder.getAdapterPosition()).getId()))
+            viewHolder.getViewIcon().setVisibility(View.VISIBLE);
+        else
+            viewHolder.getViewIcon().setVisibility(View.GONE);
 
         viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
             @Override

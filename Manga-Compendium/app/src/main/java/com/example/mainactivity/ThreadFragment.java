@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,10 @@ public class ThreadFragment extends Fragment {
     View view, back;
     ImageView image;
     Integer idThread;
-    TextView pageTitle,title, description, creator;
+    TextView pageTitle,title, description, creator, button;
+
+    FloatingActionButton newMsg;
+
     DbManager db = DbManager.getInstance();
     Thread thread;
 
@@ -48,8 +52,10 @@ public class ThreadFragment extends Fragment {
         image = (ImageView) view.findViewById(R.id.imageViewThread);
         pageTitle = (TextView) view.findViewById(R.id.threadPageTitle);
         title = (TextView) view.findViewById(R.id.titleThread);
+        button = (TextView) view.findViewById(R.id.buttonAddThread);
         description = (TextView) view.findViewById(R.id.descriptionThread);
         creator = (TextView) view.findViewById(R.id.creatorThread);
+        newMsg = (FloatingActionButton) view.findViewById(R.id.buttonNewMessage);
 
         thread= db.getThreadById(idThread);
 
@@ -59,11 +65,42 @@ public class ThreadFragment extends Fragment {
         User user = db.getUserById(thread.getId_creator());
         creator.setText("Creatore: "+user.getUsername());
 
+        if(db.findUserThread(LogIn.sharedPref.getInt("user",-1),idThread)) {
+            button.setText("Abbandona");
+        }else {
+            button.setText("Partecipa");
+        }
+
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((AppCompatActivity)getActivity()).getSupportActionBar().show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ForumFragment()).commit();            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(button.getText().equals("Partecipa")) {
+                    db.saveUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
+                    button.setText("Abbandona");
+                }else {
+                    db.deleteUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
+                    button.setText("Partecipa");
+                }
+            }
+        });
+
+        newMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateMessage fragment = new CreateMessage();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", idThread);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
+            }
         });
 
 

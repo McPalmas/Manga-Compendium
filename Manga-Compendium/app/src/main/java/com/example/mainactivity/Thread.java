@@ -3,7 +3,6 @@ package com.example.mainactivity;
 public class Thread {
     private Integer id;
     private String title;
-
     private String description;
     private String image;
     private Integer id_creator;
