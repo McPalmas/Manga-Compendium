@@ -58,7 +58,6 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),2,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.addItemDecoration(new DividerItemDecoration(list.getContext(),DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
 

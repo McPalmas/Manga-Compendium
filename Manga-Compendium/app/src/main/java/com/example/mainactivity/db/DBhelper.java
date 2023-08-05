@@ -49,6 +49,7 @@ import android.database.sqlite.SQLiteOpenHelper;
                     " ( " + DbStrings.Thread.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     DbStrings.Thread.IMAGE+" TEXT," +
                     DbStrings.Thread.TITLE+" TEXT," +
+                    DbStrings.Thread.DESCRIPTION+" TEXT," +
                     DbStrings.Thread.ID_USER_CREATOR +" INTEGER)");
 
 

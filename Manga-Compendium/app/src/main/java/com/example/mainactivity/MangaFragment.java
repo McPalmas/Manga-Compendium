@@ -42,9 +42,6 @@ public class MangaFragment extends Fragment implements
         view = inflater.inflate(R.layout.fragment_manga, container, false);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-        /*Intent intent = getIntent();
-        Serializable obj = intent.getSerializableExtra(MainActivity.DATA_EXTRA);
-        idManga = (Integer) obj;*/
 
         savedInstanceState = this.getArguments();
         if (savedInstanceState != null) {

@@ -1,16 +1,12 @@
 package com.example.mainactivity.main_fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +37,7 @@ public class LibraryFragment extends Fragment {
     ArrayList<MangaState> mangas = new ArrayList<>();
 
     CustomAdapterMangasLibrary adapter;
-    static int state =0; // 0 aggiunta 1 nome 2 stato
+    static int state = 0; // 0 aggiunta 1 nome 2 stato
 
     DbManager db = DbManager.getInstance();
 
@@ -49,7 +45,7 @@ public class LibraryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle("LIBRERIA");
-        LibraryMangas();
+        libraryMangas();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         autoCompleteTextView = view.findViewById(R.id.autoCompleteTextView);
         adapterItems = new ArrayAdapter<String>(getContext(), R.layout.spinner_dropdown_style, orderBy);
@@ -68,14 +64,12 @@ public class LibraryFragment extends Fragment {
         adapterItems = new ArrayAdapter<String>(getContext(), R.layout.spinner_dropdown_style, orderBy);
         autoCompleteTextView.setAdapter(adapterItems);
 
-        LibraryMangas();
-
+        libraryMangas();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMangasLibrary);
         adapter = new CustomAdapterMangasLibrary(mangas, this.getContext(), getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        //recyclerView.addItemDecoration(new DividerItemDecoration(list.getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
 
@@ -94,7 +88,7 @@ public class LibraryFragment extends Fragment {
                     adapter.replaceAll(mangas);
                 }else{
                     state = 0;
-                    LibraryMangas();
+                    libraryMangas();
                     adapter.replaceAll(mangas);
                 }
 
@@ -106,7 +100,7 @@ public class LibraryFragment extends Fragment {
 
 
     // restituisce tutti i manga legati ad un certo utente, li trova attaverso il loro id
-    public void LibraryMangas(){
+    public void libraryMangas(){
         ArrayList<MangaState> list = db.getMangasStatesByUserId(LogIn.sharedPref.getInt("user",-1));
         mangas = list;
         if(state == 1)

@@ -87,7 +87,6 @@ implements  PopupMenu.OnMenuItemClickListener {
     // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.row_list_item_manga_library, viewGroup, false);
 
@@ -97,22 +96,6 @@ implements  PopupMenu.OnMenuItemClickListener {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-       /* viewHolder.getViewMenu().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                builder.setTitle("Elimina");
-                builder.setMessage("Sei sicuro di voler eliminare il manga dalla libreria ?");
-                builder.setCancelable(false);
-                builder.setPositiveButton("SI", null);
-                builder.setNegativeButton("NO", null);
-                builder.show();
-            }
-        });*/
-
-
-
         viewHolder.getViewMenu().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,7 +175,6 @@ implements  PopupMenu.OnMenuItemClickListener {
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        System.out.println(currentManga + "aoooooo**********************          ");
         Toast.makeText(context, "Eliminato", Toast.LENGTH_SHORT).show();
         db.deleteUserManga(LogIn.sharedPref.getInt("user", -1), currentManga);
         return true;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateDiscussion">
+    tools:context=".CreateThread">
 
     <View
         android:id="@+id/topViewCreateDiscussion"
@@ -72,9 +72,9 @@
         android:id="@+id/textTitleCreateDiscussion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="60dp"
-        android:text="Titolo/descrizione"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Titolo"
         android:textColor="@color/darkGrey"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -87,7 +87,7 @@
         android:id="@+id/titleCreateDiscussion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Inserisci l'argomento della discussione"
+        android:hint="Inserisci il titolo, max 15 caratteri"
         android:textColorHint="@color/darkGrey"
         android:textSize="18sp"
         android:inputType="text"
@@ -101,6 +101,42 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textTitleCreateDiscussion"
+        app:layout_constraintWidth_percent="0.9"/>
+
+
+    <TextView
+        android:id="@+id/textDescriptionCreateDiscussion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Descrizione"
+        android:textColor="@color/darkGrey"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCreateDiscussion" />
+
+    <EditText
+        android:id="@+id/descriptionCreateDiscussion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Inserisci descrizione, max 50 caratteri"
+        android:textColorHint="@color/darkGrey"
+        android:textSize="18sp"
+        android:inputType="text"
+        android:textColor="@color/darkGrey"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@drawable/borderfield_grey"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textDescriptionCreateDiscussion"
         app:layout_constraintWidth_percent="0.9"/>
 
 
@@ -118,7 +154,7 @@
         app:layout_constraintWidth_percent="0.8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleCreateDiscussion"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionCreateDiscussion"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

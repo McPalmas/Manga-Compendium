@@ -22,7 +22,6 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
 
     public DbManager db = DbManager.getInstance();
     Context context;
-
     FragmentActivity activity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +37,6 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         public ImageView getImageView() {
             return image;
         }
-
         public TextView getTextViewTitle() {
             return title;
         }

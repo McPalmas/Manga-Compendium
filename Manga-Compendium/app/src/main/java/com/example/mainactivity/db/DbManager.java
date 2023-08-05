@@ -105,6 +105,7 @@ public  class DbManager
         ContentValues cv=new ContentValues();
         cv.put(DbStrings.Thread.IMAGE, thread.getImage());
         cv.put(DbStrings.Thread.TITLE, thread.getTitle());
+        cv.put(DbStrings.Thread.DESCRIPTION, thread.getDescription());
         cv.put(DbStrings.Thread.ID_USER_CREATOR, thread.getId_creator());
         try
         {
@@ -532,6 +533,7 @@ public  class DbManager
 
     public ArrayList<Thread> getThreads(){
         Cursor crs = null;
+        ArrayList<Thread> list = new ArrayList<>();
         try
         {
             SQLiteDatabase db=dbhelper.getReadableDatabase();
@@ -539,7 +541,7 @@ public  class DbManager
             crs.moveToFirst();
 
             if(crs.getCount() == 0)
-                return null;
+                return list;
 
             return cursorToThreads(crs);
         }
@@ -549,7 +551,7 @@ public  class DbManager
         }
         catch(Exception e){ System.err.println(" sql errore "+e);}
 
-        return null;
+        return list;
     }
 
     public static User cursorToUser(Cursor crs ){
@@ -569,10 +571,8 @@ public  class DbManager
     }
 
     public static Thread cursorToThread(Cursor crs ){
-        return  new Thread (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getInt(3));
+        return  new Thread (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getString(3),crs.getInt(4));
     }
-
-
 
     public static Manga cursorToManga(Cursor crs ){
         return  new Manga (crs.getInt(0), crs.getString(1),crs.getString(2), crs.getInt(3),crs.getString(4),crs.getString(5),crs.getString(6),crs.getInt(7),crs.getInt(8),crs.getString(9),crs.getString(10));
