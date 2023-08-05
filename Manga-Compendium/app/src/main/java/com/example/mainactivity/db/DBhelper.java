@@ -49,15 +49,16 @@ import android.database.sqlite.SQLiteOpenHelper;
                     " ( " + DbStrings.Thread.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     DbStrings.Thread.IMAGE+" TEXT," +
                     DbStrings.Thread.TITLE+" TEXT," +
-                    DbStrings.Thread.ID_USER_CRETAOR+" INTEGER," +
-                    DbStrings.Thread.ID_MSG+" INTEGER)");
+                    DbStrings.Thread.ID_USER_CREATOR +" INTEGER)");
 
 
             db.execSQL("CREATE TABLE "+ DbStrings.Message.TABLE+
                     " ( " + DbStrings.Message.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     DbStrings.Message.TEXT+" TEXT," +
+                    DbStrings.Message.ID_THREAD+" INTEGER," +
                     DbStrings.Message.ID_USER+" INTEGER," +
-                    DbStrings.Message.DATE+" TEXT)");
+                    DbStrings.Message.DATE+" TEXT," +
+                    "FOREIGN KEY (id_thread) REFERENCES " +DbStrings.Thread.TABLE + " (_id))");
 
             db.execSQL("CREATE TABLE "+ DbStrings.UserThread.TABLE+
                     " (" + DbStrings.UserThread.ID_USER+" INTEGER," +

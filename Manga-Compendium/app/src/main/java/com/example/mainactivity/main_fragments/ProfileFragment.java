@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +71,7 @@ public class ProfileFragment extends Fragment {
         changeEmail = (TextView) view.findViewById(R.id.buttonChangeEmail);
         changePassword = (TextView) view.findViewById(R.id.buttonChangePassword);
 
-        img.setOnClickListener(new View.OnClickListener() {
+        /*img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent();
@@ -80,16 +81,20 @@ public class ProfileFragment extends Fragment {
                 // pass the constant to compare it with the returned requestCode
                 startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
             }
+        });*/
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 3);
+            }
         });
 
         changeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent changeEmail;
-                changeEmail = new Intent(getContext(), ChangeEmail.class);
-                startActivity(changeEmail);*/
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ChangeEmail()).commit();
-
             }
         });
 
@@ -97,11 +102,7 @@ public class ProfileFragment extends Fragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent changePassword;
-                changePassword = new Intent(getContext(), ChangePassword.class);
-                startActivity(changePassword);*/
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ChangePassword()).commit();
-
             }
         });
 
@@ -109,7 +110,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    @Override
+    /*@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -119,6 +120,17 @@ public class ProfileFragment extends Fragment {
                 // Get the url of the image from data
                 selectedImage = data.getData();
             }
+        }
+    }*/
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+                selectedImage = data.getData();
+                img.setImageURI(selectedImage);
+                db.changeImage(LogIn.sharedPref.getInt("user",-1), selectedImage.toString());
+
         }
     }
 

@@ -33,6 +33,7 @@ public class CreateDiscussion extends Fragment {
 
     public DbManager db = DbManager.getInstance();
     User user;
+    Thread thread;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,8 +100,14 @@ public class CreateDiscussion extends Fragment {
     public void controll(){
         if(inputValid())
             if(checkFields()) {
+                thread = new Thread("",title.getText().toString(),LogIn.sharedPref.getInt("user",-1));
+                Integer id = db.createThread(thread);
+                ThreadFragment fragment = new ThreadFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", id);
+                fragment.setArguments(bundle);
                 Toast.makeText(getContext(), "Discussione creata" , Toast.LENGTH_LONG).show();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ForumFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             }
     }
 

@@ -62,10 +62,8 @@ public class DbStrings
         public static final String TABLE = "thread";
         public static final String ID = "_id";
         public static final String IMAGE = "image";
-
         public static final String TITLE = "title";
-        public static final String ID_USER_CRETAOR = "id_user_creator";
-        public static final String ID_MSG = "id_msg";
+        public static final String ID_USER_CREATOR = "id_user_creator";
     }
 
 
@@ -75,6 +73,7 @@ public class DbStrings
         public static final String TEXT = "text";
         public static final String ID_USER = "id_user";
         public static final String DATE = "date";
+        public static final String ID_THREAD = "id_thread";
     }
 
 

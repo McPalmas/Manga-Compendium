@@ -5,21 +5,18 @@ public class Thread {
     private String title;
     private String image;
     private Integer id_creator;
-    private Integer id_msg;
 
-    public Thread(Integer id, String image, String title, Integer id_creator, Integer id_msg){
+    public Thread(Integer id, String image, String title, Integer id_creator){
         this.id=id;
         this.image=image;
         this.title=title;
         this.id_creator=id_creator;
-        this.id_msg=id_msg;
     }
 
-    public Thread(String image, String title, Integer id_creator, Integer id_msg){
+    public Thread(String image, String title, Integer id_creator){
         this.image=image;
         this.title=title;
         this.id_creator=id_creator;
-        this.id_msg=id_msg;
     }
 
     public Integer getId() {
@@ -54,11 +51,4 @@ public class Thread {
         this.id_creator = id_creator;
     }
 
-    public Integer getId_msg() {
-        return id_msg;
-    }
-
-    public void setId_msg(Integer id_msg) {
-        this.id_msg = id_msg;
-    }
 }

@@ -99,22 +99,50 @@ public  class DbManager
         }
     }
 
-    public void saveThread(Thread thread)
+    public Integer createThread(Thread thread)
     {
         SQLiteDatabase db=dbhelper.getWritableDatabase();
         ContentValues cv=new ContentValues();
         cv.put(DbStrings.Thread.IMAGE, thread.getImage());
         cv.put(DbStrings.Thread.TITLE, thread.getTitle());
-        cv.put(DbStrings.Thread.ID_USER_CRETAOR, thread.getId_creator());
-        cv.put(DbStrings.Thread.ID_MSG, thread.getId_msg());
+        cv.put(DbStrings.Thread.ID_USER_CREATOR, thread.getId_creator());
         try
         {
-            db.insert(DbStrings.Thread.TABLE, null,cv);
+            Long l= db.insert(DbStrings.Thread.TABLE, null, cv);
+            Integer i =  l.intValue();
+            return  i;
         }
         catch (SQLiteException sqle)
         {
             System.out.println("erroreeeeeeeeeeee");
         }
+
+        return -1;
+    }
+
+
+    public Thread getThreadById(Integer id){
+        Cursor crs = null;
+        try
+        {
+            SQLiteDatabase db=dbhelper.getReadableDatabase();
+            crs=db.query(DbStrings.Thread.TABLE, null, DbStrings.Thread.ID + "=?" , new String[] {id.toString()} , null, null, null, null);
+            crs.moveToFirst();
+
+            if(crs.getCount() == 0)
+                return null;
+
+            return cursorToThread(crs);
+        }
+        catch(SQLiteException sqle)
+        {
+            System.err.println("sql errore");
+
+        }
+        catch(Exception e){ System.err.println("sql errore"+e);}
+
+        return null;
+
     }
 
     public void saveMessage(Message message)
@@ -124,6 +152,7 @@ public  class DbManager
         cv.put(DbStrings.Message.TEXT, message.getText());
         cv.put(DbStrings.Message.ID_USER, message.getId_user());
         cv.put(DbStrings.Message.DATE, message.getDate());
+        cv.put(DbStrings.Message.ID_THREAD, message.getId_thread());
         try
         {
             db.insert(DbStrings.Message.TABLE, null,cv);
@@ -249,6 +278,14 @@ public  class DbManager
         db.update(DbStrings.UserManga.TABLE,values, DbStrings.UserManga.FIELD_ID_USER + "=?" + " and " + DbStrings.UserManga.FIELD_ID_MANGA + "=?" ,new String[] {user_id.toString(),manga_id.toString()});
     }
 
+    public void changeImage(Integer user_id, String img){
+        ContentValues values = new ContentValues();
+        values.put(DbStrings.User.IMAGE,img);
+
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        db.update(DbStrings.User.TABLE,values, DbStrings.User.FIELD_ID + "=?",new String[] {user_id.toString()});
+
+    }
 
     public void changePassword(Integer user_id,String psw){
         ContentValues values = new ContentValues();
@@ -493,10 +530,49 @@ public  class DbManager
         return null;
     }
 
+    public ArrayList<Thread> getThreads(){
+        Cursor crs = null;
+        try
+        {
+            SQLiteDatabase db=dbhelper.getReadableDatabase();
+            crs = db.rawQuery( "select * from "+DbStrings.Thread.TABLE, null );
+            crs.moveToFirst();
+
+            if(crs.getCount() == 0)
+                return null;
+
+            return cursorToThreads(crs);
+        }
+        catch(SQLiteException sqle)
+        {
+            System.err.println(" sql errore ");
+        }
+        catch(Exception e){ System.err.println(" sql errore "+e);}
+
+        return null;
+    }
+
     public static User cursorToUser(Cursor crs ){
         return  new User (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getString(3),crs.getString(4));
 
     }
+
+    public static ArrayList<Thread> cursorToThreads(Cursor crs ){
+        ArrayList<Thread> threads = new ArrayList<>();
+        Thread thread;
+        while(!crs.isAfterLast()) {
+            thread = cursorToThread(crs);
+            threads.add(thread);
+            crs.moveToNext();
+        }
+        return threads;
+    }
+
+    public static Thread cursorToThread(Cursor crs ){
+        return  new Thread (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getInt(3));
+    }
+
+
 
     public static Manga cursorToManga(Cursor crs ){
         return  new Manga (crs.getInt(0), crs.getString(1),crs.getString(2), crs.getInt(3),crs.getString(4),crs.getString(5),crs.getString(6),crs.getInt(7),crs.getInt(8),crs.getString(9),crs.getString(10));

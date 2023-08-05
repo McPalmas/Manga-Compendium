@@ -3,6 +3,7 @@ package com.example.mainactivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -115,7 +116,8 @@ implements  PopupMenu.OnMenuItemClickListener {
         viewHolder.getViewMenu().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    PopupMenu popup = new PopupMenu(context, view);
+                    Context wrapper = new ContextThemeWrapper(context, R.style.PopupMenu);
+                    PopupMenu popup = new PopupMenu(wrapper, view);
                     MenuInflater inflater = popup.getMenuInflater();
                     inflater.inflate(R.menu.popup_menu, popup.getMenu());
                     popup.show();
