@@ -593,9 +593,25 @@ public  class DbManager
         return list;
     }
 
+    public ArrayList<Message> getThreadMessages(Integer id_hread){
+        Cursor crs = null;
+        ArrayList<Message> list = new ArrayList<>();
+        try {
+            SQLiteDatabase db=dbhelper.getReadableDatabase();
+            crs=db.query(DbStrings.Message.TABLE, null, DbStrings.Message.ID_THREAD + "=?" , new String[] {id_hread.toString()} , null, null, null, null);
+            crs.moveToFirst();
+
+            if(crs.getCount() == 0)
+                return list;
+            return cursorMessages(crs);
+        }
+        catch(SQLiteException sqle) {System.err.println("sql errore");}
+        catch(Exception e){ System.err.println("sql errore"+e);}
+        return list;
+    }
+
     public static User cursorToUser(Cursor crs ){
         return  new User (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getString(3),crs.getString(4));
-
     }
 
     public static ArrayList<Thread> cursorToThreads(Cursor crs ){
@@ -607,6 +623,17 @@ public  class DbManager
             crs.moveToNext();
         }
         return threads;
+    }
+
+    public static ArrayList<Message> cursorMessages(Cursor crs ){
+        ArrayList<Message> messages = new ArrayList<>();
+        Message message;
+        while(!crs.isAfterLast()) {
+            message = new Message(crs.getInt(0),crs.getString(1),crs.getInt(2),crs.getInt(3), crs.getString(4));
+            messages.add(message);
+            crs.moveToNext();
+        }
+        return messages;
     }
 
     public static Thread cursorToThread(Cursor crs ){

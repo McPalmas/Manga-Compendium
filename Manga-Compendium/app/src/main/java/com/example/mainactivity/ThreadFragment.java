@@ -34,7 +34,11 @@ public class ThreadFragment extends Fragment {
     FloatingActionButton newMsg;
 
     DbManager db = DbManager.getInstance();
-    Thread thread;
+    Thread thread;// il thread da cui carico tutte le info
+
+    ArrayList<Message> messages;
+
+    CustomAdapterMessages adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,8 +71,10 @@ public class ThreadFragment extends Fragment {
 
         if(db.findUserThread(LogIn.sharedPref.getInt("user",-1),idThread)) {
             button.setText("Abbandona");
+            newMsg.setVisibility(View.VISIBLE);
         }else {
             button.setText("Partecipa");
+            newMsg.setVisibility(View.GONE);
         }
 
 
@@ -103,18 +109,21 @@ public class ThreadFragment extends Fragment {
             }
         });
 
+       messages = getThreadMessages();
 
-        /*RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listForums);
-        adapter = new CustomAdapterThreads(threads, this.getContext(), getActivity());
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listThreads);
+        adapter = new CustomAdapterMessages(messages, this.getContext(), getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setAdapter(adapter);*/
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
 
 
-
+    public ArrayList<Message> getThreadMessages(){
+        return db.getThreadMessages(idThread);
+    }
 
 
 }

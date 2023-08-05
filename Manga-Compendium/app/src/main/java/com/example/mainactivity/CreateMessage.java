@@ -53,7 +53,8 @@ public class CreateMessage extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ForumFragment()).commit();
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ForumFragment()).commit();
+                getActivity().onBackPressed();
             }
         });
 
@@ -76,6 +77,7 @@ public class CreateMessage extends Fragment {
                 String date = formatter.format(currentTime);
                 Message msg = new Message(message.getText().toString(),LogIn.sharedPref.getInt("user",-1),idThread,date);
                 db.createMessage(msg);
+                getActivity().onBackPressed();
             }
     }
 

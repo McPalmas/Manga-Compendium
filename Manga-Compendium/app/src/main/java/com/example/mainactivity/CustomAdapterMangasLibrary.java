@@ -167,7 +167,6 @@ implements  PopupMenu.OnMenuItemClickListener {
                 bundle.putInt("id", id);
                 fragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
-
             }
         });
     }
