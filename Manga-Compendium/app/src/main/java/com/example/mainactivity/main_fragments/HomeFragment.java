@@ -3,6 +3,7 @@ package com.example.mainactivity.main_fragments;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -45,6 +46,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle z) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
 
         activity = getActivity();
 

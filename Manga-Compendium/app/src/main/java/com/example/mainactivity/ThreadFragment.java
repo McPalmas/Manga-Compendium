@@ -68,7 +68,7 @@ public class ThreadFragment extends Fragment {
 
         pageTitle.setText(thread.getTitle());
         title.setText(thread.getTitle());
-        description.setText(thread.getDescription());
+        description.setText("Descrizione: "+thread.getDescription());
         User user = db.getUserById(thread.getId_creator());
         creator.setText("Creatore: "+user.getUsername());
 

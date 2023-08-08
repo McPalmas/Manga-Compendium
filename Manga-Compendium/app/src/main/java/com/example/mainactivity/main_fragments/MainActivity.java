@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.mainactivity.HelpFragment;
 import com.example.mainactivity.LogIn;
 import com.example.mainactivity.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "TEMA CAMBIATO", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.help:
+                getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpFragment()).addToBackStack(null).commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.search:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,searchFragment).commit();
                         return true;
-                    case R.id.forum:
+                    case R.id.helpForum:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,forumFragment).commit();
                         return true;
                     case R.id.library:

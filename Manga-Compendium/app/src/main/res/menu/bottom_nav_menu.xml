@@ -10,7 +10,7 @@
         android:icon="@drawable/baseline_search_24"
         />
 
-    <item android:id="@+id/forum"
+    <item android:id="@+id/helpForum"
         android:title="Forum"
         android:icon="@drawable/baseline_chat_24"
         />
