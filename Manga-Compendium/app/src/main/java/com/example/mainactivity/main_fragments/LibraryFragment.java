@@ -91,7 +91,6 @@ public class LibraryFragment extends Fragment {
                     libraryMangas();
                     adapter.replaceAll(mangas);
                 }
-
             }
         });
 

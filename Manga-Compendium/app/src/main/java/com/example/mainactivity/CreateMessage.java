@@ -77,7 +77,12 @@ public class CreateMessage extends Fragment {
                 String date = formatter.format(currentTime);
                 Message msg = new Message(message.getText().toString(),LogIn.sharedPref.getInt("user",-1),idThread,date);
                 db.createMessage(msg);
-                getActivity().onBackPressed();
+                //getActivity().onBackPressed();
+                ThreadFragment fragment = new ThreadFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", idThread);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
             }
     }
 

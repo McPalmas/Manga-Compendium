@@ -91,32 +91,40 @@
 
             <TextView
                 android:id="@+id/buttonChangeEmail"
-                android:layout_width="380dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.7"
                 android:layout_marginTop="70dp"
                 android:layout_marginStart="20dp"
-                android:text="         Cambio Email"
-                android:textSize="30sp"
+                android:text="Cambio Email"
+                android:textAlignment="center"
+                android:textSize="25sp"
                 android:textColor="@color/darkGrey"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewUserDataProfile"
                 app:drawableEndCompat="@drawable/pencil"
-                app:drawableStartCompat="@drawable/mail" />
+                app:drawableStartCompat="@drawable/mail"
+                style="@style/Larger_Drawable"/>
             />
 
             <TextView
                 android:id="@+id/buttonChangePassword"
-                android:layout_width="380dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintWidth_percent="0.7"
                 android:layout_marginTop="55dp"
                 android:layout_marginStart="20dp"
-                android:text="      Cambio Password"
-                android:textSize="30sp"
+                android:text="Cambio Password"
+                android:textAlignment="center"
+                android:textSize="25sp"
                 android:textColor="@color/darkGrey"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/buttonChangeEmail"
                 app:drawableEndCompat="@drawable/pencil"
-                app:drawableStartCompat="@drawable/password" />
+                app:drawableStartCompat="@drawable/password"
+                style="@style/Larger_Drawable"/>
             />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

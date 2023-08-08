@@ -23,6 +23,7 @@ import com.example.mainactivity.main_fragments.ForumFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ThreadFragment extends Fragment {
 
@@ -39,6 +40,8 @@ public class ThreadFragment extends Fragment {
     ArrayList<Message> messages;
 
     CustomAdapterMessages adapter;
+
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,9 +74,11 @@ public class ThreadFragment extends Fragment {
 
         if(db.findUserThread(LogIn.sharedPref.getInt("user",-1),idThread)) {
             button.setText("Abbandona");
+            button.setTextColor(getResources().getColor(R.color.primary));
             newMsg.setVisibility(View.VISIBLE);
         }else {
             button.setText("Partecipa");
+            button.setTextColor(getResources().getColor(R.color.darkGrey));
             newMsg.setVisibility(View.GONE);
         }
 
@@ -91,9 +96,11 @@ public class ThreadFragment extends Fragment {
                 if(button.getText().equals("Partecipa")) {
                     db.saveUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
                     button.setText("Abbandona");
+                    button.setTextColor(getResources().getColor(R.color.primary));
                 }else {
                     db.deleteUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
                     button.setText("Partecipa");
+                    button.setTextColor(getResources().getColor(R.color.darkGrey));
                 }
             }
         });
@@ -109,9 +116,10 @@ public class ThreadFragment extends Fragment {
             }
         });
 
-       messages = getThreadMessages();
+        messages = getThreadMessages();
+        Collections.reverse(messages);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listThreads);
+        recyclerView = (RecyclerView) view.findViewById(R.id.listThreads);
         adapter = new CustomAdapterMessages(messages, this.getContext(), getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

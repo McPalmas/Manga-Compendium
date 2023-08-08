@@ -17,12 +17,14 @@ import android.widget.EditText;
 import com.example.mainactivity.CreateThread;
 import com.example.mainactivity.CustomAdapterThreads;
 import com.example.mainactivity.Manga;
+import com.example.mainactivity.MangaState;
 import com.example.mainactivity.R;
 import com.example.mainactivity.Thread;
 import com.example.mainactivity.db.DbManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ForumFragment extends Fragment {
 
@@ -64,6 +66,7 @@ public class ForumFragment extends Fragment {
 
         threads();
         filteredThreads = (ArrayList<Thread>) threads.clone();
+        filteredThreads.sort(Comparator.comparing(Thread::getTitle));
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listForums);
         adapter = new CustomAdapterThreads(filteredThreads, this.getContext(), getActivity());
