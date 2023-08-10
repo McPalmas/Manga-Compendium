@@ -496,8 +496,30 @@ public  class DbManager
         catch(Exception e){ System.err.println("sql errore"+e);}
 
         return null;
-
     }
+
+    public ArrayList<Integer> getUserThreadsByUserId(Integer id){
+        Cursor crs = null;
+        ArrayList<Integer> list = new ArrayList<>();
+        try
+        {
+            SQLiteDatabase db=dbhelper.getReadableDatabase();
+            crs=db.query(DbStrings.UserThread.TABLE, null, DbStrings.UserThread.ID_USER + "=?" , new String[] {id.toString()} , null, null, null, null);
+            crs.moveToFirst();
+
+            if(crs.getCount() == 0)
+                return list;
+
+            return cursorToUserThreadsId(crs);
+        }
+        catch(SQLiteException sqle)
+        {System.err.println("sql errore");}
+        catch(Exception e){ System.err.println("sql errore"+e);}
+
+        return list;
+    }
+
+
 
     public Integer findMangaByTitle(String title){
         Cursor crs = null;
@@ -625,6 +647,17 @@ public  class DbManager
         return threads;
     }
 
+    public static ArrayList<Integer> cursorToUserThreadsId(Cursor crs ){
+        ArrayList<Integer> userThreads = new ArrayList<>();
+        Integer userThread;
+        while(!crs.isAfterLast()) {
+            userThread = crs.getInt(1);
+            userThreads.add(userThread);
+            crs.moveToNext();
+        }
+        return userThreads;
+    }
+
     public static ArrayList<Message> cursorMessages(Cursor crs ){
         ArrayList<Message> messages = new ArrayList<>();
         Message message;
@@ -637,7 +670,7 @@ public  class DbManager
     }
 
     public static Thread cursorToThread(Cursor crs ){
-        return  new Thread (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getString(3),crs.getInt(4));
+        return  new Thread (crs.getInt(0), crs.getString(1),crs.getString(2),crs.getString(3),crs.getInt(4),crs.getString(5) );
     }
 
     public static Manga cursorToManga(Cursor crs ){

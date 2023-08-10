@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.example.mainactivity.CreateThread;
 import com.example.mainactivity.CustomAdapterThreads;
+import com.example.mainactivity.LogIn;
 import com.example.mainactivity.Manga;
 import com.example.mainactivity.MangaState;
 import com.example.mainactivity.R;
@@ -24,6 +25,7 @@ import com.example.mainactivity.db.DbManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class ForumFragment extends Fragment {
@@ -66,7 +68,15 @@ public class ForumFragment extends Fragment {
 
         threads();
         filteredThreads = (ArrayList<Thread>) threads.clone();
-        filteredThreads.sort(Comparator.comparing(Thread::getTitle));
+        //filteredThreads.sort(Comparator.comparing(Thread::getTimeStamp));
+        for (Thread t:filteredThreads) {
+            System.out.println(t.getTitle());
+        }
+        order();
+
+        for (Thread t:filteredThreads) {
+            System.out.println(t.getTitle());
+        }
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listForums);
         adapter = new CustomAdapterThreads(filteredThreads, this.getContext(), getActivity());
@@ -102,6 +112,30 @@ public class ForumFragment extends Fragment {
 
     public void threads(){
        threads = db.getThreads();
+    }
+
+    private void order(){
+        ArrayList<Integer> list = db.getUserThreadsByUserId(LogIn.sharedPref.getInt("user",-1));
+
+        for (Integer i:list) {
+            System.out.println(i);
+        }
+
+        Integer id = 1;
+        System.out.println(list.contains(id)+"ciaooooo");
+        Collections.sort(filteredThreads, new Comparator<Thread>() {
+            @Override
+            public int compare(Thread t1, Thread t2) {
+                if(list.contains(t1.getId()) && !list.contains(t2.getId()))
+                    return -1;
+                if (!list.contains(t1.getId()) && list.contains(t2.getId()))
+                    return 1;
+                if (t1.getTimeStamp().getTime() > t2.getTimeStamp().getTime())
+                    return 1;
+                else
+                    return -1;
+            }
+        });
     }
 
 }

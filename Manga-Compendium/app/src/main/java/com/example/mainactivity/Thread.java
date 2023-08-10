@@ -1,18 +1,30 @@
 package com.example.mainactivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Thread {
     private Integer id;
     private String title;
     private String description;
     private String image;
     private Integer id_creator;
+    private Date timeStamp;
 
-    public Thread(Integer id, String image, String title, String description, Integer id_creator){
+
+    public Thread(Integer id, String image, String title, String description, Integer id_creator, String timeStamp){
         this.id=id;
         this.image=image;
         this.description=description;
         this.title=title;
         this.id_creator=id_creator;
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            this.timeStamp = formatter.parse(timeStamp);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Thread(String image, String title, String description, Integer id_creator){
@@ -60,6 +72,10 @@ public class Thread {
 
     public void setId_creator(Integer id_creator) {
         this.id_creator = id_creator;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
     }
 
 }

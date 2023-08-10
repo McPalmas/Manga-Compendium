@@ -50,8 +50,8 @@ import android.database.sqlite.SQLiteOpenHelper;
                     DbStrings.Thread.IMAGE+" TEXT," +
                     DbStrings.Thread.TITLE+" TEXT," +
                     DbStrings.Thread.DESCRIPTION+" TEXT," +
-                    DbStrings.Thread.ID_USER_CREATOR +" INTEGER)");
-
+                    DbStrings.Thread.ID_USER_CREATOR +" INTEGER,"+
+                    DbStrings.Thread.TIMESTAMP +" DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
             db.execSQL("CREATE TABLE "+ DbStrings.Message.TABLE+
                     " ( " + DbStrings.Message.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

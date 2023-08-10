@@ -65,6 +65,7 @@ public class DbStrings
         public static final String TITLE = "title";
         public static final String DESCRIPTION = "description";
         public static final String ID_USER_CREATOR = "id_user_creator";
+        public static final String TIMESTAMP = "timeStamp";
     }
 
 
