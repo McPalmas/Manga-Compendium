@@ -9,10 +9,10 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/barHome"
-        android:background="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:titleTextColor="@color/white"
+        style="@style/Toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
     <FrameLayout

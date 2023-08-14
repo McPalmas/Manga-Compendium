@@ -2,8 +2,10 @@ package com.example.mainactivity.main_fragments;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.UiModeManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.mainactivity.AboutUs;
 import com.example.mainactivity.HelpFragment;
 import com.example.mainactivity.LogIn;
 import com.example.mainactivity.R;
@@ -20,6 +23,8 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
 
     public static final String DATA_EXTRA = "com.example.mainActivity.manga";
+
+    private static boolean darkMode = false;
     BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment=new HomeFragment();
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        androidx.appcompat.widget.Toolbar bar = findViewById(R.id.barHome);
         switch (item.getItemId()){
             case R.id.logout:
                 Toast.makeText(this, "LOGOUT", Toast.LENGTH_SHORT).show();
@@ -47,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 edt.apply();
                 return true;
             case R.id.theme:
-                Toast.makeText(this, "TEMA CAMBIATO", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().add(R.id.container,new AboutUs()).addToBackStack(null).commit();
                 return true;
             case R.id.help:
                 getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpFragment()).addToBackStack(null).commit();
@@ -56,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

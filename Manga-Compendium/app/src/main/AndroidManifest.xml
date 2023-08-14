@@ -25,6 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".main_fragments.MainActivity"
+            android:configChanges="uiMode"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity

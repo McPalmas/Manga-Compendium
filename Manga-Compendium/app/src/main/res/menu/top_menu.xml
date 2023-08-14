@@ -12,8 +12,8 @@
                 app:showAsAction="never"
                 />
             <item android:id="@+id/theme"
-                android:title="Tema"
-                android:icon="@drawable/theme_icon"
+                android:title="Chi siamo"
+                android:icon="@drawable/about_us"
                 app:showAsAction="never"/>
             <item android:id="@+id/help"
                 android:title="Aiuto"
