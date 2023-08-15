@@ -70,7 +70,7 @@
     <ImageView
         android:id="@+id/imageChangeImage"
         android:layout_width="0dp"
-        android:layout_height="330dp"
+        android:layout_height="350dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/cambio_immagine"
         app:layout_constraintStart_toStartOf="parent"

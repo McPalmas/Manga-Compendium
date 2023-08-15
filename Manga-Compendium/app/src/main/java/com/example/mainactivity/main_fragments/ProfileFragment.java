@@ -3,6 +3,7 @@ package com.example.mainactivity.main_fragments;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,10 +19,13 @@ import android.widget.TextView;
 
 import com.example.mainactivity.ChangeEmail;
 import com.example.mainactivity.ChangePassword;
+import com.example.mainactivity.FileHelper;
 import com.example.mainactivity.LogIn;
 import com.example.mainactivity.R;
 import com.example.mainactivity.User;
 import com.example.mainactivity.db.DbManager;
+
+import java.io.IOException;
 
 public class ProfileFragment extends Fragment {
 
@@ -38,7 +42,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.out.println("distruttoooooooo");
     }
 
     @Override
@@ -58,8 +61,18 @@ public class ProfileFragment extends Fragment {
 
         img = view.findViewById(R.id.imageViewUserProfile);
 
-        if(!user.getImg().equals(""))
-            img.setImageURI(Uri.parse(user.getImg()));
+        if(!user.getImg().equals("")) {
+            Bitmap b;
+            try {
+                  b = MediaStore.Images.Media.getBitmap(this.getActivity().getContentResolver(), Uri.parse(user.getImg()));
+                  FileHelper.saveUserImgToInternalStorage(b,db,getActivity());
+                  img.setImageBitmap(b);
+               // img.setImageURI(Uri.parse(user.getImg()));
+            } catch (IOException e) {
+                img.setImageBitmap(FileHelper.loadBitmap(user.getImg()));
+            }
+        }
+
 
 
         username = (TextView) view.findViewById(R.id.usernameProfile);
@@ -71,17 +84,6 @@ public class ProfileFragment extends Fragment {
         changeEmail = (TextView) view.findViewById(R.id.buttonChangeEmail);
         changePassword = (TextView) view.findViewById(R.id.buttonChangePassword);
 
-        /*img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                i.setType("image/*");
-                i.setAction(Intent.ACTION_GET_CONTENT);
-
-                // pass the constant to compare it with the returned requestCode
-                startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
-            }
-        });*/
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,26 +112,22 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == 1) {
-                // Get the url of the image from data
-                selectedImage = data.getData();
-            }
-        }
-    }*/
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
-                selectedImage = data.getData();
-                img.setImageURI(selectedImage);
-                db.changeImage(LogIn.sharedPref.getInt("user",-1), selectedImage.toString());
+            selectedImage = data.getData();
+             /*img.setImageURI(selectedImage);
+             db.changeImage(LogIn.sharedPref.getInt("user",-1), selectedImage.toString());*/
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                img.setImageBitmap(bitmap);
+                FileHelper.saveUserImgToInternalStorage(bitmap,db,getActivity());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
         }
     }

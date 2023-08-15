@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,8 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         private final ImageView image;
         private final TextView title, info;
 
+        private  final  ConstraintLayout container;
+
         private final View threadIcon;
 
         public ViewHolder(View view) {
@@ -36,6 +39,7 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
             title = view.findViewById(R.id.textRowThread);
             info = view.findViewById(R.id.infoThread);
             threadIcon = view.findViewById(R.id.addedThreadIcon);
+            container = view.findViewById(R.id.threadContainer);
         }
 
         public ImageView getImageView() {
@@ -50,6 +54,10 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         }
         public TextView getTextViewInfo() {
             return info;
+        }
+
+        public ConstraintLayout getContainer() {
+            return container;
         }
 
     }
@@ -73,7 +81,9 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getImageView().setImageURI(Uri.parse(threads.get(position).getImage()));
+        if(!threads.get(position).getImage().equals(""))
+            viewHolder.getImageView().setImageBitmap(FileHelper.loadBitmap(threads.get(position).getImage()));
+
         viewHolder.getTextViewTitle().setText(threads.get(position).getTitle());
 
         User user = db.getUserById(threads.get(position).getId_creator());
@@ -86,7 +96,7 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         else
             viewHolder.getViewIcon().setVisibility(View.GONE);
 
-        viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Integer id = threads.get(viewHolder.getAdapterPosition()).getId();
@@ -99,6 +109,18 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         });
 
         viewHolder.getTextViewTitle().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Integer id = threads.get(viewHolder.getAdapterPosition()).getId();
+                ThreadFragment fragment = new ThreadFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", id);
+                fragment.setArguments(bundle);
+                activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
+            }
+        });*/
+
+        viewHolder.getContainer().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Integer id = threads.get(viewHolder.getAdapterPosition()).getId();

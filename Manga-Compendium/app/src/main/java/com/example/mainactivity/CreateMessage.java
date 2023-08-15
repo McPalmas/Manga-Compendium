@@ -58,6 +58,8 @@ public class CreateMessage extends Fragment {
             }
         });
 
+        message.requestFocus();
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,6 +79,7 @@ public class CreateMessage extends Fragment {
                 String date = formatter.format(currentTime);
                 Message msg = new Message(message.getText().toString(),LogIn.sharedPref.getInt("user",-1),idThread,date);
                 db.createMessage(msg);
+                System.out.println(msg.getId_user() + " messaggio appena creato");
                 //getActivity().onBackPressed();
                 ThreadFragment fragment = new ThreadFragment();
                 Bundle bundle = new Bundle();

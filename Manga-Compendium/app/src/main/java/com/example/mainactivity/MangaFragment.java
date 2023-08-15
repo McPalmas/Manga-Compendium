@@ -50,8 +50,6 @@ public class MangaFragment extends Fragment implements
 
         manga = db.getMangaById(idManga);
 
-        System.out.println(idManga + "id mangaa");
-
         back = view.findViewById(R.id.backManga);
 
         pageTitle = view.findViewById(R.id.mangaPageTitle);
@@ -141,9 +139,8 @@ public class MangaFragment extends Fragment implements
                     addManga.setBackgroundResource(R.drawable.borderfield_grey);
                     addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_grey), null);
                     deleteUserManga();
+                    spinner.setEnabled(false);
                 }
-
-                System.out.println(db.getMangasIdByUserId(LogIn.sharedPref.getInt("user",-1)) + "id manga++++++++++++++++++");
             }
         });
         return view;

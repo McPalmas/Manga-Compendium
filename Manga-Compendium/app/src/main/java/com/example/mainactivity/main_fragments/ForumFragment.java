@@ -68,15 +68,8 @@ public class ForumFragment extends Fragment {
 
         threads();
         filteredThreads = (ArrayList<Thread>) threads.clone();
-        //filteredThreads.sort(Comparator.comparing(Thread::getTimeStamp));
-        for (Thread t:filteredThreads) {
-            System.out.println(t.getTitle());
-        }
-        order();
 
-        for (Thread t:filteredThreads) {
-            System.out.println(t.getTitle());
-        }
+        order();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listForums);
         adapter = new CustomAdapterThreads(filteredThreads, this.getContext(), getActivity());
@@ -117,12 +110,8 @@ public class ForumFragment extends Fragment {
     private void order(){
         ArrayList<Integer> list = db.getUserThreadsByUserId(LogIn.sharedPref.getInt("user",-1));
 
-        for (Integer i:list) {
-            System.out.println(i);
-        }
 
         Integer id = 1;
-        System.out.println(list.contains(id)+"ciaooooo");
         Collections.sort(filteredThreads, new Comparator<Thread>() {
             @Override
             public int compare(Thread t1, Thread t2) {

@@ -1,14 +1,19 @@
 package com.example.mainactivity;
 
+import static android.app.Activity.RESULT_OK;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +27,7 @@ import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,6 +37,8 @@ public class ThreadFragment extends Fragment {
     ImageView image;
     Integer idThread;
     TextView pageTitle,title, description, creator, button;
+
+    Uri selectedImage;
 
     FloatingActionButton newMsg;
 
@@ -42,6 +50,12 @@ public class ThreadFragment extends Fragment {
     CustomAdapterMessages adapter;
 
     RecyclerView recyclerView;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +82,7 @@ public class ThreadFragment extends Fragment {
 
         pageTitle.setText(thread.getTitle());
         title.setText(thread.getTitle());
-        description.setText("Descrizione: "+thread.getDescription());
+        description.setText(thread.getDescription());
         User user = db.getUserById(thread.getId_creator());
         creator.setText("Creatore: "+user.getUsername());
 
@@ -82,11 +96,9 @@ public class ThreadFragment extends Fragment {
             newMsg.setVisibility(View.GONE);
         }
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((AppCompatActivity)getActivity()).getSupportActionBar().show();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ForumFragment()).commit();            }
         });
 
@@ -97,10 +109,26 @@ public class ThreadFragment extends Fragment {
                     db.saveUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
                     button.setText("Abbandona");
                     button.setTextColor(getResources().getColor(R.color.primary));
+                    newMsg.setVisibility(View.VISIBLE);
                 }else {
                     db.deleteUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
                     button.setText("Partecipa");
                     button.setTextColor(getResources().getColor(R.color.darkGrey));
+                    newMsg.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        if(!thread.getImage().equals(""))
+            image.setImageBitmap(FileHelper.loadBitmap(thread.getImage()));
+
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(LogIn.sharedPref.getInt("user",-1) == thread.getId_creator()) {
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, 3);
                 }
             }
         });
@@ -129,8 +157,24 @@ public class ThreadFragment extends Fragment {
     }
 
 
-    public ArrayList<Message> getThreadMessages(){
-        return db.getThreadMessages(idThread);
+    public ArrayList<Message> getThreadMessages(){return db.getThreadMessages(idThread);}
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            selectedImage = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                image.setImageBitmap(bitmap);
+                FileHelper.saveThreadImgToInternalStorage(bitmap,db,getActivity(),idThread);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 
 

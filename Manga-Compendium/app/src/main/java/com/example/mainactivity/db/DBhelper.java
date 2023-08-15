@@ -56,8 +56,8 @@ import android.database.sqlite.SQLiteOpenHelper;
             db.execSQL("CREATE TABLE "+ DbStrings.Message.TABLE+
                     " ( " + DbStrings.Message.ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     DbStrings.Message.TEXT+" TEXT," +
-                    DbStrings.Message.ID_THREAD+" INTEGER," +
                     DbStrings.Message.ID_USER+" INTEGER," +
+                    DbStrings.Message.ID_THREAD+" INTEGER," +
                     DbStrings.Message.DATE+" TEXT," +
                     "FOREIGN KEY (id_thread) REFERENCES " +DbStrings.Thread.TABLE + " (_id))");
 

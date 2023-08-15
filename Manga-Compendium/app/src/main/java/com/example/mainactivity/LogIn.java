@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +20,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mainactivity.main_fragments.MainActivity;
+
+import java.io.IOException;
 
 public class LogIn extends AppCompatActivity {
 

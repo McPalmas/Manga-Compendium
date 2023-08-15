@@ -33,8 +33,9 @@ public  class DbManager
     public void createDB(Context ctx){
         dbhelper = new DBhelper(ctx);
         if(dbIsEmpty()) {
-            User admin = new User("admin", "gianmarco@gmail.com", "admin", "android.resource://com.example.mainactivity/"+ R.drawable.foto_gianmarco);
-            User admin2 = new User("gianmarcopalmas", "gianmarcopalms32@gmail.com", "admin2", "");
+            User gianmarco = new User("Gianmarco Palmas", "gianmarcopalmas@gmail.com", "Password1!", "android.resource://com.example.mainactivity/"+ R.drawable.foto_gianmarco);
+            User giovanni = new User("Giovanni Sprega", "giovannisprega@gmail.com", "Password1!", "android.resource://com.example.mainactivity/"+ R.drawable.foto_giovanni);
+            User alessandro = new User("Alessandro Gusai", "alessandrogusai@gmail.com", "Password1!", "android.resource://com.example.mainactivity/"+ R.drawable.foto_alessandro);
 
             Manga blackClover = new Manga("Black Clover", "Yuki Tabata", 2015,"Shueisha", "Weekly Shonen Jump", "fantasy, azione", 35,350, "In un mondo dove la magia è al centro della vita quotidiana sono nati Asta, un ragazzo completamente privo di ogni abilità magica, e il suo amico Yuno, che al contrario è dotato di grande forza magica legata al vento. I due sono fin da piccoli rivali e hanno deciso di competere per il titolo di Imperatore Magico, la più alta carica magica del loro regno. ", "android.resource://com.example.mainactivity/"+ R.drawable.black_clover);
             Manga bleach = new Manga("Bleach", "Tite Kubo", 2001, "Shueisha", "Weekly Shonen Jump", "avventura, azione, soprannaturale", 74, 686, "Il giovane Ichigo Kurosaki, riceve accidentalmente poteri da shinigami da Rukia Kuchiki. Oltre ad assumersi l'incarico di difendere gli esseri umani dagli spiriti maligni e di guidare le anime defunte verso l'aldilà, Ichigo viene coinvolto in una serie di scontri tra spiriti, che lo portano a esplorare vari regni dell'aldilà e a scoprire di più sulle proprie origini.", "android.resource://com.example.mainactivity/"+ R.drawable.bleach);
@@ -48,8 +49,9 @@ public  class DbManager
             Manga jujutsuKaisen = new Manga("Jujutsu Kaisen", "Gege Akutami", 2018, "Shueisha", "Weekly Shonen Jump", "avventura, dark fantasy, soprannaturale", 23, 229, "Itadori Yūji è uno studente all'apparenza normale, che di normale non ha nulla, che frequenta il Club dell'Occulto. I suoi compagni si troveranno nei guai dopo aver trovato il dito mummificato di Ryomen Sukuna, la più feroce divinità demoniaca, e per salvarli così da diventare più forte sarà costretto a ingoiarlo. Yūji diventa tutt'uno con il demone e sotto la guida del più potente degli stregoni, Satoru Gojō, entra nell'Istituto di Arti Occulte di Tokyo, un'organizzazione che combatte le Maledizioni; il suo destino è già scritto: dovrà cercare tutte le 20 dita di Sukuna, ingerirle per poi essere ucciso, così da porre fine una volta per tutte alla minaccia che alberga dentro di lui.", "android.resource://com.example.mainactivity/"+ R.drawable.jujutsu_kaisen);
 
 
-            saveUser(admin.getUsername(), admin.getEmail(), admin.getPassword(), admin.getImg());
-            saveUser(admin2.getUsername(), admin2.getEmail(), admin2.getPassword(), admin2.getImg());
+            saveUser(gianmarco.getUsername(), gianmarco.getEmail(), gianmarco.getPassword(), gianmarco.getImg());
+            saveUser(giovanni.getUsername(), giovanni.getEmail(), giovanni.getPassword(), giovanni.getImg());
+            saveUser(alessandro.getUsername(), alessandro.getEmail(), alessandro.getPassword(), alessandro.getImg());
 
             saveManga(blackClover);
             saveManga(bleach);
@@ -318,13 +320,20 @@ public  class DbManager
         db.update(DbStrings.UserManga.TABLE,values, DbStrings.UserManga.FIELD_ID_USER + "=?" + " and " + DbStrings.UserManga.FIELD_ID_MANGA + "=?" ,new String[] {user_id.toString(),manga_id.toString()});
     }
 
-    public void changeImage(Integer user_id, String img){
+    public void changeUserImage(Integer user_id, String img){
         ContentValues values = new ContentValues();
         values.put(DbStrings.User.IMAGE,img);
 
         SQLiteDatabase db=dbhelper.getReadableDatabase();
         db.update(DbStrings.User.TABLE,values, DbStrings.User.FIELD_ID + "=?",new String[] {user_id.toString()});
+    }
 
+    public void changeThreadImage(Integer thread_id, String img){
+        ContentValues values = new ContentValues();
+        values.put(DbStrings.Thread.IMAGE,img);
+
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        db.update(DbStrings.Thread.TABLE,values, DbStrings.Thread.ID + "=?",new String[] {thread_id.toString()});
     }
 
     public void changePassword(Integer user_id,String psw){
@@ -398,30 +407,6 @@ public  class DbManager
         return null;
     }
 
-    //restituisce lo stato di un manga attraverso il suo id e quello dell'utente a cui è riferito
-    /*public String getStateByMangaId(Integer id_user, Integer id_manga){
-        Cursor crs = null;
-        try
-        {
-            SQLiteDatabase db=dbhelper.getReadableDatabase();
-            crs=db.query(DbStrings.Libreria.TABLE, null, DbStrings.Libreria.FIELD_ID_USER + "=?" , new String[] {id_user.toString(), id_manga.toString()} , null, null, null, null);
-            crs.moveToFirst();
-
-            if(crs.getCount() == 0)
-                return null;
-
-            return cursorToMangasId(crs);
-        }
-        catch(SQLiteException sqle)
-        {
-            System.err.println("sql errore");
-
-        }
-        catch(Exception e){  System.err.println("sql errore"+e); }
-
-        return null;
-
-    }*/
 
     public User findUserByEmail(String email){
         Cursor crs = null;
@@ -615,12 +600,12 @@ public  class DbManager
         return list;
     }
 
-    public ArrayList<Message> getThreadMessages(Integer id_hread){
+    public ArrayList<Message> getThreadMessages(Integer id_thread){
         Cursor crs = null;
         ArrayList<Message> list = new ArrayList<>();
         try {
             SQLiteDatabase db=dbhelper.getReadableDatabase();
-            crs=db.query(DbStrings.Message.TABLE, null, DbStrings.Message.ID_THREAD + "=?" , new String[] {id_hread.toString()} , null, null, null, null);
+            crs=db.query(DbStrings.Message.TABLE, null, DbStrings.Message.ID_THREAD + "=?" , new String[] {id_thread.toString()} , null, null, null, null);
             crs.moveToFirst();
 
             if(crs.getCount() == 0)
@@ -666,6 +651,7 @@ public  class DbManager
             messages.add(message);
             crs.moveToNext();
         }
+
         return messages;
     }
 

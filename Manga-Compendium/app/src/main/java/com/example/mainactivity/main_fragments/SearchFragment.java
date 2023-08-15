@@ -2,6 +2,7 @@ package com.example.mainactivity.main_fragments;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,8 @@ public class SearchFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle("CERCA");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
     }
 
 
@@ -46,6 +49,9 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+
 
         searchBar = (EditText) view.findViewById(R.id.searchMangas);
         list = (RecyclerView) view.findViewById(R.id.listMangas);

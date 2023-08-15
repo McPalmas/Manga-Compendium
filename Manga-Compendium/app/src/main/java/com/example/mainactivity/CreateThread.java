@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
+
+import java.io.IOException;
 
 public class CreateThread extends Fragment {
 
@@ -32,6 +36,8 @@ public class CreateThread extends Fragment {
     public DbManager db = DbManager.getInstance();
     User user;
     Thread thread;
+
+    Bitmap bitmap = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,11 +96,8 @@ public class CreateThread extends Fragment {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent();
-                i.setType("image/*");
-                i.setAction(Intent.ACTION_GET_CONTENT);
-                // pass the constant to compare it with the returned requestCode
-                startActivityForResult(Intent.createChooser(i, "Select Picture"), 1);
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, 3);
             }
         });
 
@@ -108,6 +111,10 @@ public class CreateThread extends Fragment {
                 thread = new Thread("",title.getText().toString(),description.getText().toString(),LogIn.sharedPref.getInt("user",-1));
                 Integer id = db.createThread(thread);
                 db.createUserThread(LogIn.sharedPref.getInt("user",-1),id);
+
+                if(bitmap != null)
+                    FileHelper.saveThreadImgToInternalStorage(bitmap,db,getActivity(),id);
+
                 ThreadFragment fragment = new ThreadFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", id);
@@ -141,7 +148,7 @@ public class CreateThread extends Fragment {
             valid = false;
         }
 
-        if(description.getText().toString().length() > 50 ) {
+        if(description.getText().toString().length() > 80 ) {
             description.setBackgroundResource(R.drawable.bordererror);
             description.setError("Errore! La descrizione deve contenere un massimo di 50 caratteri!");
             valid = false;
@@ -152,13 +159,16 @@ public class CreateThread extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == 1) {
-                // Get the url of the image from data
-                selectedImage = data.getData();
+        if (resultCode == RESULT_OK && data != null) {
+            selectedImage = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                image.setImageBitmap(bitmap);
+                //FileHelper.saveThreadImgToInternalStorage(bitmap,db,getActivity(),1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
+
         }
     }
 

@@ -4,46 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:paddingTop="15dp"
+    android:id="@+id/messageContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/messageTextContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="6dp"
-        android:background="@drawable/borderlist_manga">
+        android:paddingTop="7dp"
+        android:paddingEnd="7dp"
+        android:paddingStart="7dp"
+        android:paddingBottom="13dp">
+
+        <ImageView
+            android:id="@+id/imageMessage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/userNameMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
             android:text="Utente: gianmarcopalmas"
             android:textColor="@color/darkGrey"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/imageMessage"
+            app:layout_constraintTop_toTopOf="@+id/imageMessage" />
 
         <TextView
             android:id="@+id/dateMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Data: fquwsdhhs"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:text="xx giorni"
             android:textColor="@color/darkGrey"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/userNameMessage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="77dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="25dp"
             android:text="messaggioghvdsjsdhfrgtewefrgtysfdgdshjbcsdhbjcdk"
             android:textColor="@color/darkGrey"
             android:textSize="18sp"
@@ -51,7 +65,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameMessage" />
+            app:layout_constraintTop_toBottomOf="@+id/imageMessage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/messageTextContainer"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

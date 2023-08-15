@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
                              Bundle z) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
 
         activity = getActivity();
@@ -93,6 +94,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle("MANGA COMPENDIUM");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 
     @Override
