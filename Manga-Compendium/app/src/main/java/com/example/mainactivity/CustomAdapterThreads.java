@@ -89,36 +89,11 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
         User user = db.getUserById(threads.get(position).getId_creator());
         viewHolder.getTextViewInfo().setText(user.getUsername());
 
-        //viewHolder.getTextViewInfo().setEnabled(db.findUserThread(LogIn.sharedPref.getInt("user", -1), threads.get(viewHolder.getAdapterPosition()).getId()));
-
         if(db.findUserThread(LogIn.sharedPref.getInt("user", -1), threads.get(viewHolder.getAdapterPosition()).getId()))
             viewHolder.getViewIcon().setVisibility(View.VISIBLE);
         else
             viewHolder.getViewIcon().setVisibility(View.GONE);
 
-        /*viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Integer id = threads.get(viewHolder.getAdapterPosition()).getId();
-                ThreadFragment fragment = new ThreadFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", id);
-                fragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
-            }
-        });
-
-        viewHolder.getTextViewTitle().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Integer id = threads.get(viewHolder.getAdapterPosition()).getId();
-                ThreadFragment fragment = new ThreadFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", id);
-                fragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
-            }
-        });*/
 
         viewHolder.getContainer().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,12 +106,8 @@ public class CustomAdapterThreads extends RecyclerView.Adapter<CustomAdapterThre
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
             }
         });
-
-
-
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return threads.size();

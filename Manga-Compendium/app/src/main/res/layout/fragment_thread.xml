@@ -41,36 +41,17 @@
         app:layout_constraintStart_toStartOf="@+id/topThread"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:id="@+id/secondViewThread"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topThread">
 
-            <Space
-                android:id="@+id/spaceThread"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/secondViewThread"
-                android:layout_width="0dp"
-                android:layout_height="220dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.03"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spaceThread" />
-
-            <ImageView
+        <ImageView
                 android:id="@+id/imageViewThread"
                 android:layout_width="140dp"
                 android:layout_height="160dp"
@@ -97,38 +78,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spaceThread" />
+                app:layout_constraintTop_toTopOf="@id/secondViewThread" />
 
-            <TextView
-                android:id="@+id/buttonAddThread"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:text="Partecipa"
-                android:textAlignment="center"
-                android:background="@drawable/borderfield_grey"
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
-                android:paddingStart="6dp"
-                android:paddingEnd="6dp"
-                android:textColor="@color/darkGrey"
-                android:layout_marginTop="20dp"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/creatorThread"
-                app:layout_constraintTop_toBottomOf="@+id/creatorThread"
-                />
-
-            <View
-                android:id="@+id/separatorThreads"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:outlineAmbientShadowColor="@color/red"
-                android:layout_marginTop="18dp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/secondViewThread" />
 
             <TextView
                 android:id="@+id/creatorThread"
@@ -140,8 +91,29 @@
                 android:textStyle="bold"
                 android:textSize="16dp"
                 app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/titleThread"
                 app:layout_constraintTop_toBottomOf="@+id/titleThread" />
+
+            <TextView
+                android:id="@+id/buttonAddThread"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:text="Partecipa"
+                android:textAlignment="center"
+                android:background="@drawable/borderfield_grey"
+                android:backgroundTint="@color/lightGrey"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:textColor="@color/darkGrey"
+                android:layout_marginTop="20dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/creatorThread"
+                app:layout_constraintTop_toBottomOf="@+id/creatorThread"
+                />
 
             <TextView
                 android:id="@+id/descriptionThread"
@@ -158,23 +130,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageViewThread"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <View
+                android:id="@+id/separatorThreads"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:outlineAmbientShadowColor="@color/red"
+                android:layout_marginTop="18dp"
+                android:background="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/descriptionThread" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listThreads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separatorThreads"/>
+                app:layout_constraintTop_toBottomOf="@+id/secondViewThread"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonNewMessage"

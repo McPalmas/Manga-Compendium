@@ -50,8 +50,9 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
         searchBar = (EditText) view.findViewById(R.id.searchMangas);
         list = (RecyclerView) view.findViewById(R.id.listMangas);

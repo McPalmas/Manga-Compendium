@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.db.DbStrings;
+import com.example.mainactivity.main_fragments.LibraryFragment;
 
 import java.util.ArrayList;
 
@@ -152,8 +153,8 @@ implements  PopupMenu.OnMenuItemClickListener {
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", id);
                 fragment.setArguments(bundle);
-                activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
-
+                activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack("Library").commit();
+                LibraryFragment.interrupt = true;
             }
         });
 
@@ -166,6 +167,7 @@ implements  PopupMenu.OnMenuItemClickListener {
                 bundle.putInt("id", id);
                 fragment.setArguments(bundle);
                 activity.getSupportFragmentManager().beginTransaction().add(R.id.container,fragment).addToBackStack(null).commit();
+                LibraryFragment.interrupt = true;
             }
         });
     }

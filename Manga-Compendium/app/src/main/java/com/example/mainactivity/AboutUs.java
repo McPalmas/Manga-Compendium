@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mainactivity.main_fragments.MainActivity;
+
 
 public class AboutUs extends Fragment {
 
@@ -19,6 +21,8 @@ public class AboutUs extends Fragment {
                              Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_about_us, container, false);
 
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         back = view.findViewById(R.id.backAboutUs);
@@ -27,6 +31,7 @@ public class AboutUs extends Fragment {
             @Override
             public void onClick(View view) {
                 ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+                MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
                 getActivity().onBackPressed();
             }
         });

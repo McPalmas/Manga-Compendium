@@ -54,6 +54,8 @@ public class ForumFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_forum, container, false);
 
+        MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
+
         searchBar = (EditText)  view.findViewById(R.id.searchThreads);
         create = (FloatingActionButton) view.findViewById(R.id.buttonNewDiscussion);
 

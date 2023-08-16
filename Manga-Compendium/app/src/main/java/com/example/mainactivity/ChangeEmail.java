@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mainactivity.db.DbManager;
+import com.example.mainactivity.main_fragments.MainActivity;
 import com.example.mainactivity.main_fragments.ProfileFragment;
 
 public class ChangeEmail extends Fragment {
@@ -34,6 +35,8 @@ public class ChangeEmail extends Fragment {
         view = inflater.inflate(R.layout.activity_change_email, container, false);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         user = db.getUserById(LogIn.sharedPref.getInt("user",-1));
 

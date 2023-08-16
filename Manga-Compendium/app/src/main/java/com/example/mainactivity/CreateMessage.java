@@ -19,10 +19,12 @@ import android.widget.Toast;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
+import com.example.mainactivity.main_fragments.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class CreateMessage extends Fragment {
 
@@ -38,6 +40,8 @@ public class CreateMessage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_create_message, container, false);
+
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
@@ -75,12 +79,10 @@ public class CreateMessage extends Fragment {
         if(inputValid())
             if(checkFields()) {
                 Date currentTime = Calendar.getInstance().getTime();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.getDefault());
                 String date = formatter.format(currentTime);
                 Message msg = new Message(message.getText().toString(),LogIn.sharedPref.getInt("user",-1),idThread,date);
                 db.createMessage(msg);
-                System.out.println(msg.getId_user() + " messaggio appena creato");
-                //getActivity().onBackPressed();
                 ThreadFragment fragment = new ThreadFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt("id", idThread);

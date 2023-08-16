@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
+import com.example.mainactivity.main_fragments.MainActivity;
 
 import java.io.IOException;
 
@@ -43,6 +44,8 @@ public class CreateThread extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_create_thread, container, false);
+
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 

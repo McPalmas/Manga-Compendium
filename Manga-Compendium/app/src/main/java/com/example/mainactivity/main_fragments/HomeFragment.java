@@ -47,6 +47,8 @@ public class HomeFragment extends Fragment {
                              Bundle z) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
 
 

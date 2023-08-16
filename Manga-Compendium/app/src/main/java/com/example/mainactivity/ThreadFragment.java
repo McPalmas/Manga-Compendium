@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.mainactivity.db.DbManager;
 import com.example.mainactivity.main_fragments.ForumFragment;
+import com.example.mainactivity.main_fragments.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -64,6 +65,8 @@ public class ThreadFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
+
         savedInstanceState = this.getArguments();
         if (savedInstanceState != null) {
             idThread = savedInstanceState.getInt("id", -1);
@@ -92,7 +95,7 @@ public class ThreadFragment extends Fragment {
             newMsg.setVisibility(View.VISIBLE);
         }else {
             button.setText("Partecipa");
-            button.setTextColor(getResources().getColor(R.color.darkGrey));
+            button.setTextColor(getResources().getColor(R.color.darkerGreen));
             newMsg.setVisibility(View.GONE);
         }
 
@@ -113,7 +116,7 @@ public class ThreadFragment extends Fragment {
                 }else {
                     db.deleteUserThread(LogIn.sharedPref.getInt("user",-1),idThread);
                     button.setText("Partecipa");
-                    button.setTextColor(getResources().getColor(R.color.darkGrey));
+                    button.setTextColor(getResources().getColor(R.color.darkerGreen));
                     newMsg.setVisibility(View.GONE);
                 }
             }

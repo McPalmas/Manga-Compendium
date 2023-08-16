@@ -98,18 +98,30 @@ public class CustomAdapterMessages extends RecyclerView.Adapter<CustomAdapterMes
     public int getDateDiffFromNow(String date, ViewHolder viewHolder){
         int days = 0;
         try{
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy", Locale.getDefault());
-            long diff = new Date().getTime() - sdf.parse(date).getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.getDefault());
+            Date now = Calendar.getInstance().getTime();
+            String noww = sdf.format(now);
+            System.out.println(noww + " " + sdf.parse(noww).getTime() +" "+ date + " " + sdf.parse(date).getTime() + " " + sdf.parse(sdf.format(now)));
+            long diff = sdf.parse(noww).getTime() - sdf.parse(date).getTime();
             long seconds = diff / 1000;
             long minutes = seconds / 60;
             long hours = minutes / 60;
             days = ((int) (long) hours / 24);
+            System.out.println("data messaggio : "+ sdf.parse(date).getTime() + " data adesso : "+ Calendar.getInstance().getTime().getTime() + " diff : "+diff + " giorni : "+days +" ore : "+ hours+" minuti : "+minutes);
             if(days > 1)
                 viewHolder.getDate().setText(days + " giorni");
             else if(days == 1)
                 viewHolder.getDate().setText("ieri");
+            else if(hours > 1)
+                viewHolder.getDate().setText(hours + " ore");
+            else if(hours == 1)
+                viewHolder.getDate().setText("1 ora");
+            else if(minutes >= 1)
+                viewHolder.getDate().setText(minutes + " min.");
+            else if(seconds >=1)
+                viewHolder.getDate().setText(seconds + " sec.");
             else
-                viewHolder.getDate().setText("oggi");
+                viewHolder.getDate().setText("adesso");
         }catch (Exception e){
             e.printStackTrace();
         }

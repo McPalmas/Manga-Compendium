@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.mainactivity.AboutUs;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String DATA_EXTRA = "com.example.mainActivity.manga";
 
     private static boolean darkMode = false;
-    BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
 
     HomeFragment homeFragment=new HomeFragment();
     SearchFragment searchFragment=new SearchFragment();
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         bottomNavigationView= findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setVisibility(View.VISIBLE);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
 

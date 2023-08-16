@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mainactivity.main_fragments.MainActivity;
+
 public class HelpFragment extends Fragment {
 
    View view,back;
@@ -20,6 +22,7 @@ public class HelpFragment extends Fragment {
                              Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_help, container, false);
 
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
@@ -34,6 +37,7 @@ public class HelpFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+                MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
                 getActivity().onBackPressed();
             }
         });
@@ -42,7 +46,6 @@ public class HelpFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpBottomMenu()).addToBackStack(null).commit();
-
             }
         });
 
@@ -50,7 +53,6 @@ public class HelpFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpAddManga()).addToBackStack(null).commit();
-
             }
         });
 

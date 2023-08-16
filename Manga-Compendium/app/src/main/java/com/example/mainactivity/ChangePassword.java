@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mainactivity.db.DbManager;
+import com.example.mainactivity.main_fragments.MainActivity;
 import com.example.mainactivity.main_fragments.ProfileFragment;
 
 public class ChangePassword extends Fragment {
@@ -31,6 +32,8 @@ public class ChangePassword extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_change_password, container, false);
+
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 

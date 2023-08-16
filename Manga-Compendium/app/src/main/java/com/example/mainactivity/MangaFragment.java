@@ -2,6 +2,7 @@ package com.example.mainactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -17,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.mainactivity.db.DbManager;
+import com.example.mainactivity.main_fragments.LibraryFragment;
+import com.example.mainactivity.main_fragments.MainActivity;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,7 @@ public class MangaFragment extends Fragment implements
         view = inflater.inflate(R.layout.fragment_manga, container, false);
 
         ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        MainActivity.bottomNavigationView.setVisibility(View.GONE);
 
         savedInstanceState = this.getArguments();
         if (savedInstanceState != null) {
@@ -101,15 +105,17 @@ public class MangaFragment extends Fragment implements
 
 
         if(mangaIsAlreadyAdded()){
-            addManga.setText(R.string.manga_aggiunto);
-            addManga.setBackgroundResource(R.drawable.borderfield_green);
-            addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_green), null);
+            addManga.setText("Rimuovi");
+            addManga.setTextColor(getResources().getColor(R.color.primary));
+            addManga.setBackgroundResource(R.drawable.bordererror);
+            addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_grey), null);
             spinner.setEnabled(true);
             setDefaultSpinnerSelection();
         }else{
             addManga.setText(R.string.aggiungi_manga);
-            addManga.setBackgroundResource(R.drawable.borderfield_grey);
-            addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_grey), null);
+            addManga.setTextColor(getResources().getColor(R.color.darkerGreen));
+            addManga.setBackgroundResource(R.drawable.borderfield_green);
+            addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_empty), null);
             spinner.setEnabled(false);
         }
 
@@ -119,7 +125,12 @@ public class MangaFragment extends Fragment implements
             @Override
             public void onClick(View view) {
                 ((AppCompatActivity)getActivity()).getSupportActionBar().show();
-                getActivity().onBackPressed();
+                MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
+                if(LibraryFragment.interrupt) {
+                    LibraryFragment.interrupt = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new LibraryFragment()).commit();
+                }else
+                    getActivity().onBackPressed();
             }
         });
 
@@ -128,16 +139,17 @@ public class MangaFragment extends Fragment implements
             @Override
             public void onClick(View view) {
                 if(addManga.getText().equals("Aggiungi")) {
-                    addManga.setText(R.string.manga_aggiunto);
-                    addManga.setBackgroundResource(R.drawable.borderfield_green);
-                    addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_green), null);
-                    //addManga.setTextColor(getResources().getColor(R.color.green));
+                    addManga.setText("Rimuovi");
+                    addManga.setBackgroundResource(R.drawable.bordererror);
+                    addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_grey), null);
+                    addManga.setTextColor(getResources().getColor(R.color.primary));
                     db.saveUserManga(LogIn.sharedPref.getInt("user",-1),idManga);
                     spinner.setEnabled(true);
                 }else{
                     addManga.setText(R.string.aggiungi_manga);
-                    addManga.setBackgroundResource(R.drawable.borderfield_grey);
-                    addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_grey), null);
+                    addManga.setBackgroundResource(R.drawable.borderfield_green);
+                    addManga.setTextColor(getResources().getColor(R.color.darkerGreen));
+                    addManga.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getActivity().getDrawable(R.drawable.star_empty), null);
                     deleteUserManga();
                     spinner.setEnabled(false);
                 }

@@ -57,6 +57,8 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
+
         user = db.getUserById(LogIn.sharedPref.getInt("user",-1));
 
         img = view.findViewById(R.id.imageViewUserProfile);

@@ -2,6 +2,7 @@ package com.example.mainactivity.main_fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import com.example.mainactivity.ChangeEmail;
 import com.example.mainactivity.CustomAdapterMangasLibrary;
 import com.example.mainactivity.LogIn;
 import com.example.mainactivity.MangaState;
@@ -37,9 +39,13 @@ public class LibraryFragment extends Fragment {
     ArrayList<MangaState> mangas = new ArrayList<>();
 
     CustomAdapterMangasLibrary adapter;
+
+    RecyclerView recyclerView;
     static int state = 0; // 0 aggiunta 1 nome 2 stato
 
     DbManager db = DbManager.getInstance();
+
+    public static boolean interrupt = false;
 
     @Override
     public void onResume() {
@@ -58,6 +64,10 @@ public class LibraryFragment extends Fragment {
                              Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_library, container, false);
 
+        System.out.println("sono stato creatooooooo");
+
+        MainActivity.bottomNavigationView.setVisibility(View.VISIBLE);
+
         list = (RecyclerView) view.findViewById(R.id.listMangasLibrary);
 
         autoCompleteTextView = view.findViewById(R.id.autoCompleteTextView);
@@ -66,7 +76,7 @@ public class LibraryFragment extends Fragment {
 
         libraryMangas();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.listMangasLibrary);
+        recyclerView = (RecyclerView) view.findViewById(R.id.listMangasLibrary);
         adapter = new CustomAdapterMangasLibrary(mangas, this.getContext(), getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
