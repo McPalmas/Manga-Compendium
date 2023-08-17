@@ -17,6 +17,8 @@ public class HelpFragment extends Fragment {
    View view,back;
    TextView menuText,addManga, forumText, deleteText, changeImage;
 
+   public static boolean active = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,38 +47,50 @@ public class HelpFragment extends Fragment {
         menuText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpBottomMenu()).addToBackStack(null).commit();
+                if(active) {
+                    active = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new HelpBottomMenu()).addToBackStack(null).commit();
+                }
             }
         });
 
         addManga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpAddManga()).addToBackStack(null).commit();
+                if(active) {
+                    active = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new HelpAddManga()).addToBackStack(null).commit();
+                }
             }
         });
 
         forumText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpForum()).addToBackStack(null).commit();
-
+                if(active) {
+                    active = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new HelpForum()).addToBackStack(null).commit();
+                }
             }
         });
 
         deleteText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpDeleteManga()).addToBackStack(null).commit();
-
+                if(active){
+                    active = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new HelpDeleteManga()).addToBackStack(null).commit();
+                }
             }
         });
 
         changeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new HelpChangeImage()).addToBackStack(null).commit();
-
+                if(active) {
+                    active = false;
+                    getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new HelpChangeImage()).addToBackStack(null).commit();
+                }
             }
         });
 

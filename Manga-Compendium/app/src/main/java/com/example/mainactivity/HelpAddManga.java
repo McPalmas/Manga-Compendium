@@ -26,6 +26,7 @@ public class HelpAddManga extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HelpFragment.active = true;
                 getActivity().onBackPressed();
             }
         });
