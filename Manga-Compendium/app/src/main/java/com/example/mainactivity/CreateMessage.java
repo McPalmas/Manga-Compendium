@@ -64,6 +64,13 @@ public class CreateMessage extends Fragment {
 
         message.requestFocus();
 
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                message.setBackgroundResource(R.drawable.borderlist_manga);
+            }
+        });
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,13 +100,17 @@ public class CreateMessage extends Fragment {
 
     private Boolean inputValid(){
         if (message.getText().toString().equals("")) {
+            message.setBackgroundResource(R.drawable.borderlist_red);
+            message.setError("Errore! Inserisci un messaggio");
             return  false;
         }
         return true;
     }
 
     private Boolean checkFields(){
-        if(message.getText().toString().length() > 100 ) {
+        if(message.getText().toString().length() > 300 ) {
+            message.setBackgroundResource(R.drawable.borderlist_red);
+            message.setError("Errore! Il messaggio deve contenere un massimo di 300 caratteri!");
             return false;
         }
         return  true;
